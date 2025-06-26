@@ -36,9 +36,8 @@
             </main>
         </div>
 
-        <x-toaster-hub />
-
         @livewireScripts
+        <x-toaster-hub />
     </body>
 
 </html>

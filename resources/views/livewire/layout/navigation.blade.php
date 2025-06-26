@@ -30,8 +30,13 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('app.dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link :href="route('app.dashboard')" :active="request()->routeIs('app.dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
+                        {{ __('Category') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -81,8 +86,12 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('app.dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('app.dashboard')" :active="request()->routeIs('dapp.ashboard')" wire:navigate>
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
+                {{ __('Category') }}
             </x-responsive-nav-link>
         </div>
 

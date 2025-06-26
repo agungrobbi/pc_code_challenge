@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Livewire\Category;
+
+use App\Livewire\Utils\Modal;
+use App\Livewire\Utils\Slug;
+use App\Models\Category;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Masmerise\Toaster\Toaster;
+
+class Upsert extends Component
+{
+    use Modal;
+    use Slug;
+
+    private $modalParameter = "{ detail: 'modalCategory' }";
+    private $fields = ['category', 'title', 'slug'];
+
+    public ?Category $category = null;
+    public $title = '';
+    public $slug = '';
+
+    public function mount(?Category $category = null): void
+    {
+        if ($category) {
+            $this->category = $category;
+            $this->title = $category->title;
+            $this->slug = $category->slug;
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.category.modal');
+    }
+
+    #[On('open-category-modal')]
+    public function openModal(?int $id = null): void
+    {
+        if ($id) {
+            $this->category = Category::findOrFail($id);
+            $this->title = $this->category->title;
+            $this->slug = $this->category->slug;
+        } else {
+            $this->resetModal($this->fields);
+        }
+
+        $this->modalEvent('open', $this->modalParameter);
+    }
+
+    public function save(): void
+    {
+        $rules = [
+            'title' => 'required|min:4|max:255',
+            'slug' => 'required|min:4|max:255',
+        ];
+
+        // Add unique rules if editing existing category.
+        if ($this->category) {
+            $rules['slug'] .= '|unique:categories,slug,' . $this->category->id;
+        }
+
+        $validated = $this->validate($rules);
+
+        if ($this->category) {
+            $this->category->update($validated);
+            Toaster::success(__('Category updated successfully!'));
+        } else {
+            Category::create($validated);
+            Toaster::success(__('Category created successfully!'));
+        }
+
+        $this->modalEvent('close', $this->modalParameter);
+        $this->resetModal($this->fields);
+
+        $this->dispatch('refresh-category-table');
+    }
+
+    #[On('do-category-delete')]
+    public function deleteModal(?int $id = null): void
+    {
+        Category::findOrFail($id)->delete();
+        Toaster::success(__('Category deleted successfully!'));
+
+        $this->dispatch('refresh-category-table');
+    }
+}
