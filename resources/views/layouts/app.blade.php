@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -37,6 +38,7 @@
         </div>
 
         @livewireScripts
+        @stack('scripts')
         <x-toaster-hub />
     </body>
 
