@@ -33,7 +33,7 @@ class Post extends Model
      * @return belongsToMany
      * @description get all categories for the post
      */
-    public function posts(): belongsToMany
+    public function categories(): belongsToMany
     {
         return $this->belongsToMany(Category::class, 'post_category');
     }

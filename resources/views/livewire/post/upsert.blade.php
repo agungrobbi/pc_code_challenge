@@ -33,6 +33,21 @@
                     </div>
 
                     <div>
+                        <x-form.label for="categories" :value="__('Categories')" />
+                        <select
+                            id="categories"
+                            multiple
+                            wire:model="selectedCategories"
+                            class="block mt-1 w-full border-gray-100 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-500 sm:text-sm rounded-md text-green-900"
+                        >
+                            @foreach($allCategories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                        <x-form.input-error :messages="$errors->get('selectedCategories')" for="selectedCategories" class="mt-2" />
+                    </div>
+
+                    <div>
                         <x-form.label for="image" :value="__('Image')" />
                         <x-form.image-picker
                             id="banner_image"

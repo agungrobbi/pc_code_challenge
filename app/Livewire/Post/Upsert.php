@@ -3,9 +3,11 @@
 namespace App\Livewire\Post;
 
 use App\Enums\ContentStatus;
+use App\Models\Category;
 use App\Models\Post;
 use App\Livewire\Utils\Slug;
 use App\Livewire\Utils\Status;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -24,6 +26,9 @@ class Upsert extends Component
     public $image = '';
     public $excerpt = '';
     public $content = '';
+    public $selectedCategories = [];
+
+    public Collection $allCategories;
 
     public function mount($post = null): void
     {
@@ -38,12 +43,15 @@ class Upsert extends Component
                 $this->image = $this->post->image;
                 $this->excerpt = $this->post->excerpt;
                 $this->content = $this->post->content;
+                $this->selectedCategories = $this->post->categories->pluck('id')->toArray();
             } else {
                 abort(404);
             }
         } else {
             abort_if(Gate::denies('create post'), 403);
         }
+
+        $this->allCategories = Category::orderBy('title')->get();
     }
 
     public function render()
@@ -60,6 +68,8 @@ class Upsert extends Component
             'image' => 'nullable|url|max:255',
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
+            'selectedCategories' => 'nullable|array',
+            'selectedCategories.*' => 'exists:categories,id',
         ];
 
         if ($this->post) {
@@ -84,9 +94,11 @@ class Upsert extends Component
 
         if ($this->post) {
             $this->post->update($data);
+            $this->post->categories()->sync($this->selectedCategories);
             Toaster::success(__('Post updated successfully.'));
         } else {
-            Post::create($data);
+            $post = Post::create($data);
+            $post->categories()->attach($this->selectedCategories);
             Toaster::success(__('Post created successfully.'));
         }
 
