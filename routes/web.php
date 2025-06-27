@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Category\Index as CategoryIndex;
+use App\Livewire\Dashboard;
 use App\Livewire\Media;
 use App\Livewire\Page\Index as PageIndex;
 use App\Livewire\Page\Upsert as PageUpsert;
@@ -11,12 +12,10 @@ use UniSharp\LaravelFilemanager\Lfm;
 
 Route::middleware('auth')->name('app.')->group(function () {
     // Route from breeze
-    Route::view('/', 'dashboard')
-        ->middleware(['auth', 'verified'])
+    Route::get('/', Dashboard::class)
         ->name('dashboard');
 
     Route::view('profile', 'profile')
-        ->middleware(['auth'])
         ->name('profile');
 
     // Livewire routes

@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -13,7 +13,7 @@
                         <div class="text-gray-900">
                             {{ __("Pages") }}
                         </div>
-                        <div class="text-xl font-bold">10</div>
+                        <div class="text-xl font-bold">{{ $totalPages }}</div>
                     </div>
                 </div>
                 <div>
@@ -21,7 +21,7 @@
                         <div class="text-gray-900">
                             {{ __("Posts") }}
                         </div>
-                        <div class="text-xl font-bold">10</div>
+                        <div class="text-xl font-bold">{{ $totalPosts }}</div>
                     </div>
                 </div>
                 <div>
@@ -29,10 +29,10 @@
                         <div class="text-gray-900">
                             {{ __("Categories") }}
                         </div>
-                        <div class="text-xl font-bold">10</div>
+                        <div class="text-xl font-bold">{{ $totalCategories }}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
