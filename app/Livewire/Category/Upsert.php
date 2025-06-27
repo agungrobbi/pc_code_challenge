@@ -52,8 +52,8 @@ class Upsert extends Component
     public function save(): void
     {
         $rules = [
-            'title' => 'required|min:4|max:255',
-            'slug' => 'required|min:4|max:255',
+            'title' => 'required|string|min:4|max:255',
+            'slug' => 'required|string|min:4|max:255',
         ];
 
         // Add unique rules if editing existing category.

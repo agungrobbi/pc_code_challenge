@@ -27,7 +27,7 @@ class Table extends DataTableComponent
                 ->sortable(),
             Column::make('Actions')
                 ->label(
-                    fn ($row, Column $column) => view('livewire.category.table-actions', ['row' => $row])
+                    fn ($row) => view('livewire.category.table-actions', ['row' => $row])
                 )
                 ->html(),
         ];
