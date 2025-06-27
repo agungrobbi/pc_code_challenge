@@ -35,7 +35,7 @@ new class extends Component
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
+                    <x-nav-link :href="route('app.category')" :active="request()->routeIs('app.category')" wire:navigate>
                         {{ __('Category') }}
                     </x-nav-link>
                 </div>
@@ -90,7 +90,7 @@ new class extends Component
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
+            <x-responsive-nav-link :href="route('app.category')" :active="request()->routeIs('app.category')" wire:navigate>
                 {{ __('Category') }}
             </x-responsive-nav-link>
         </div>
