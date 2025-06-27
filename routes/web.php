@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Category\Index as CategoryIndex;
+use App\Livewire\Media;
 use App\Livewire\Page\Index as PageIndex;
 use App\Livewire\Page\Upsert as PageUpsert;
 use App\Livewire\Post\Index as PostIndex;
 use App\Livewire\Post\Upsert as PostUpsert;
+use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 Route::middleware('auth')->name('app.')->group(function () {
     // Route from breeze
@@ -39,6 +41,12 @@ Route::middleware('auth')->name('app.')->group(function () {
             ->name('create');
         Route::get('edit/{post}', PostUpsert::class)
             ->name('edit');
+    });
+
+    Route::get('/media', Media::class)
+        ->name('media');
+    Route::group(['prefix' => 'media-gallery'], function () {
+        Lfm::routes();
     });
 });
 

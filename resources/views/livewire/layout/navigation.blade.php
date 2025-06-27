@@ -34,6 +34,11 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('app.media')" :active="request()->routeIs('app.media')" wire:navigate>
+                        {{ __('Media') }}
+                    </x-nav-link>
+                </div>
                 @can('view post')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('app.post.index')" :active="request()->routeIs('app.post.index')" wire:navigate>
@@ -106,6 +111,9 @@ new class extends Component
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('app.media')" :active="request()->routeIs('app.media')" wire:navigate>
+                {{ __('Media') }}
+            </x-responsive-nav-link>
             @can('view post')
             <x-responsive-nav-link :href="route('app.post.index')" :active="request()->routeIs('app.post.index')" wire:navigate>
                 {{ __('Post') }}
