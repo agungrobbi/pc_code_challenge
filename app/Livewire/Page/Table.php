@@ -49,7 +49,7 @@ class Table extends DataTableComponent
     #[On('do-page-delete')]
     public function deletePage(?int $id = null): void
     {
-        abort_if(Gate::denies('delete_page'), 403);
+        abort_if(Gate::denies('delete page'), 403);
 
         Page::findOrFail($id)->delete();
         Toaster::success(__('Page deleted successfully!'));

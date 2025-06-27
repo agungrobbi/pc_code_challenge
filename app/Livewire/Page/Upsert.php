@@ -26,7 +26,7 @@ class Upsert extends Component
     public function mount($page = null): void
     {
         if ($page) {
-            abort_if(Gate::denies('edit_page'), 403);
+            abort_if(Gate::denies('update page'), 403);
 
             $this->page = Page::find($page);
             if ($this->page) {
@@ -39,7 +39,7 @@ class Upsert extends Component
             }
         }
         else {
-            abort_if(Gate::denies('edit_page'), 403);
+            abort_if(Gate::denies('create page'), 403);
         }
     }
 

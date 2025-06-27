@@ -11,7 +11,7 @@ class Index extends Component
 {
     public function render()
     {
-        abort_if(Gate::denies('view_category'), 403);
+        abort_if(Gate::denies('view category'), 403);
 
         return view('livewire.category.index');
     }

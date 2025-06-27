@@ -40,13 +40,13 @@ class Upsert extends Component
     public function openModal(?int $id = null): void
     {
         if ($id) {
-            abort_if(Gate::denies('edit_category'), 403);
+            abort_if(Gate::denies('update category'), 403);
 
             $this->category = Category::findOrFail($id);
             $this->title = $this->category->title;
             $this->slug = $this->category->slug;
         } else {
-            abort_if(Gate::denies('create_category'), 403);
+            abort_if(Gate::denies('create category'), 403);
 
             $this->resetModal($this->fields);
         }
@@ -62,12 +62,12 @@ class Upsert extends Component
         ];
 
         if ($this->category) {
-            abort_if(Gate::denies('edit_category'), 403);
+            abort_if(Gate::denies('update category'), 403);
 
             $rules['slug'] .= '|unique:categories,slug,' . $this->category->id;
         }
         else {
-            abort_if(Gate::denies('create_category'), 403);
+            abort_if(Gate::denies('create category'), 403);
         }
 
         $validated = $this->validate($rules);
@@ -89,7 +89,7 @@ class Upsert extends Component
     #[On('do-category-delete')]
     public function deleteModal(?int $id = null): void
     {
-        abort_if(Gate::denies('delete_category'), 403);
+        abort_if(Gate::denies('delete category'), 403);
 
         Category::findOrFail($id)->delete();
         Toaster::success(__('Category deleted successfully!'));
