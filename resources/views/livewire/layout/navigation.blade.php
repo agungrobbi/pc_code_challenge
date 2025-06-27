@@ -34,16 +34,27 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @can('view post')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('app.post.index')" :active="request()->routeIs('app.post.index')" wire:navigate>
+                        {{ __('Post') }}
+                    </x-nav-link>
+                </div>
+                @endcan
+                @can('view page')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('app.page.index')" :active="request()->routeIs('app.page.index')" wire:navigate>
                         {{ __('Page') }}
                     </x-nav-link>
                 </div>
+                @endcan
+                @can('view category')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
                         {{ __('Category') }}
                     </x-nav-link>
                 </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->
@@ -95,12 +106,21 @@ new class extends Component
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            @can('view post')
+            <x-responsive-nav-link :href="route('app.post.index')" :active="request()->routeIs('app.post.index')" wire:navigate>
+                {{ __('Post') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('view page')
             <x-responsive-nav-link :href="route('app.page.index')" :active="request()->routeIs('app.page.index')" wire:navigate>
                 {{ __('Page') }}
             </x-responsive-nav-link>
+            @endcan
+            @can('view category')
             <x-responsive-nav-link :href="route('app.category.index')" :active="request()->routeIs('app.category.index')" wire:navigate>
                 {{ __('Category') }}
             </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

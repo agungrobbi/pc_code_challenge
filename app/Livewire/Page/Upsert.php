@@ -6,6 +6,7 @@ use App\Enums\ContentStatus;
 use App\Livewire\Utils\Slug;
 use App\Livewire\Utils\Status;
 use App\Models\Page;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
@@ -25,6 +26,8 @@ class Upsert extends Component
     public function mount($page = null): void
     {
         if ($page) {
+            abort_if(Gate::denies('edit_page'), 403);
+
             $this->page = Page::find($page);
             if ($this->page) {
                 $this->title = $this->page->title;
@@ -34,6 +37,9 @@ class Upsert extends Component
             } else {
                 abort(404);
             }
+        }
+        else {
+            abort_if(Gate::denies('edit_page'), 403);
         }
     }
 

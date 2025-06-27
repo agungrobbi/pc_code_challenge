@@ -5,6 +5,7 @@ namespace App\Livewire\Page;
 use App\Enums\ContentStatus;
 use App\Models\Page;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\On;
 use Masmerise\Toaster\Toaster;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -48,6 +49,8 @@ class Table extends DataTableComponent
     #[On('do-page-delete')]
     public function deletePage(?int $id = null): void
     {
+        abort_if(Gate::denies('delete_page'), 403);
+
         Page::findOrFail($id)->delete();
         Toaster::success(__('Page deleted successfully!'));
     }

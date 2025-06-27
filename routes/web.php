@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Category\Index as CategoryIndex;
 use App\Livewire\Page\Index as PageIndex;
 use App\Livewire\Page\Upsert as PageUpsert;
+use App\Livewire\Post\Index as PostIndex;
+use App\Livewire\Post\Upsert as PostUpsert;
 
 Route::middleware('auth')->name('app.')->group(function () {
     // Route from breeze
@@ -27,6 +29,15 @@ Route::middleware('auth')->name('app.')->group(function () {
         Route::get('create', PageUpsert::class)
             ->name('create');
         Route::get('edit/{page}', PageUpsert::class)
+            ->name('edit');
+    });
+
+    Route::name('post.')->prefix('post')->group(function () {
+        Route::get('/', PostIndex::class)
+            ->name('index');
+        Route::get('create', PostUpsert::class)
+            ->name('create');
+        Route::get('edit/{post}', PostUpsert::class)
             ->name('edit');
     });
 });

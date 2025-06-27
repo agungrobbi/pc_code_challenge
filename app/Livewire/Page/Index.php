@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Page;
 
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -10,6 +11,8 @@ class Index extends Component
 {
     public function render()
     {
+        abort_if(Gate::denies('view_page'), 403);
+
         return view('livewire.page.index');
     }
 }
