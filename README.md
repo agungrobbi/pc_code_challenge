@@ -1,3 +1,11 @@
+## Requirements
+
+* PHP >= 8.2
+* Composer
+* Node.js & npm (or Yarn)
+* Database (MySQL, PostgreSQL, SQLite, etc.)
+* (Optional for local development) Laragon, XAMPP, Valet, or `php artisan serve`
+
 ## Features
 
 * **RESTful API:** Full CRUD operations for Posts, Pages, and Categories.
@@ -8,13 +16,15 @@
 * **Database Seeding:** Easy generation of dummy data for development.
 * **Eloquent Relationships:** Many-to-many relationship between Posts and Categories.
 
-## Requirements
+## External Packages
 
-* PHP >= 8.2
-* Composer
-* Node.js & npm (or Yarn)
-* Database (MySQL, PostgreSQL, SQLite, etc.)
-* (Optional for local development) Laragon, XAMPP, Valet, or `php artisan serve`
+* **Laravel Sanctum:** For API token authentication.
+* **Spatie Laravel Permissions:** For role-based access control.
+* **Spatie Laravel Sluggable:** For automatic and unique slug generation for content.
+* **Livewire Toaster:** For toaster notification.
+* **Livewire Tables:** For generating datatables.
+* **Laravel File Manager:** For handling media uploads and selection.
+* **Trix Editor:** For rich text editing capabilities.
 
 ## Installation
 
@@ -107,41 +117,5 @@ Once the project is running:
 ## API Endpoints
 
 All API endpoints are prefixed with `/api`. Access requires a Bearer Token (Sanctum).
+Documentation can be accessed from `http://127.0.0.1:8000/api/docs`
 Download [postman collection](https://drive.google.com/file/d/11bHLmOGUpAPuvBzOPqLEa013o-U4dtKM/view?usp=drive_link).
-
-### Authentication
-
-* **Login (POST):** `{{site_url}}/api/login`
-    * Body (JSON): `{"email": "admin@gmail.com", "password": "password", "device_name": "Postman"}`
-    * **Response provides the `token` for authenticated requests.**
-* **Logout (POST):** `{{site_url}}/api/logout` (Requires Bearer Token)
-
-### Categories (`/api/category`)
-
-* **GET /api/category:** List all categories.
-* **GET /api/category/{id}:** Get a single category.
-* **POST /api/category:** Create a new category.
-    * Body (JSON): `{"title": "New Category", "slug": "new-category"}`
-* **PUT /api/category/{id}:** Update an existing category.
-    * Body (JSON): `{"title": "Updated Category", "slug": "updated-category"}`
-* **DELETE /api/category/{id}:** Delete a category.
-
-### Posts (`/api/posts`)
-
-* **GET /api/posts:** List all posts.
-* **GET /api/posts/{id}:** Get a single post.
-* **POST /api/posts:** Create a new post.
-    * Body (JSON): `{"title": "Post Title", "slug": "post-title", "status": "draft", "image": "URL", "excerpt": "Excerpt", "content": "Full HTML Content", "category_ids": [1, 2]}`
-* **PUT /api/posts/{id}:** Update an existing post.
-    * Body (JSON): `{"title": "Updated Title", ..., "category_ids": [3]}`
-* **DELETE /api/posts/{id}:** Delete a post.
-
-### Pages (`/api/pages`)
-
-* **GET /api/pages:** List all pages.
-* **GET /api/pages/{id}:** Get a single page.
-* **POST /api/pages:** Create a new page.
-    * Body (JSON): `{"title": "Page Title", "slug": "page-title", "status": "published", "body": "Page HTML Content"}`
-* **PUT /api/pages/{id}:** Update an existing page.
-    * Body (JSON): `{"title": "Updated Title", ...}`
-* **DELETE /api/pages/{id}:** Delete a page.
