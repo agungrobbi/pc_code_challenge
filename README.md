@@ -19,6 +19,7 @@
 ## External Packages
 
 * **Laravel Sanctum:** For API token authentication.
+* **Scribe:** For API documentation.
 * **Spatie Laravel Permissions:** For role-based access control.
 * **Spatie Laravel Sluggable:** For automatic and unique slug generation for content.
 * **Livewire Toaster:** For toaster notification.
