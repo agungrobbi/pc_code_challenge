@@ -104,14 +104,14 @@ Once the project is running:
 
 1.  **Navigate to:** `http://127.0.0.1:8000/login` (or your local domain).
 2.  **Credentials:**
-    -  Admin: Can see all menu
-        **Email:** `admin@gmail.com`
+    -  Admin: Can see all menu\
+        **Email:** `admin@gmail.com`\
         **Password:** `password`
-    -  Page Editor: Allowed to do CRUD for page and media
-        **Email:** `posteditor@gmail.com`
+    -  Page Editor: Allowed to do CRUD for page and media\
+        **Email:** `posteditor@gmail.com`\
         **Password:** `password`
-    -  Post Editor: Allowed to do CRUD for post and media
-        **Email:** `pageeditor@gmail.com`
+    -  Post Editor: Allowed to do CRUD for post and media\
+        **Email:** `pageeditor@gmail.com`\
         **Password:** `password`
 
 ## API Endpoints
