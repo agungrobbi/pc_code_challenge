@@ -50,8 +50,8 @@
                     <div>
                         <x-form.label for="image" :value="__('Image')" />
                         <x-form.image-picker
-                            id="banner_image"
-                            name="banner_url"
+                            id="image"
+                            name="image"
                             wire:model="image"
                         />
                         <x-form.input-error :messages="$errors->get('image')" for="image" class="mt-2" />

@@ -19,18 +19,14 @@ $previewId = $id . '_holder';
             Choose Image
         </a>
 
-        <input id="{{ $id }}" name="{{ $name }}" type="text" value="{{ old($name, $value) }}"
+        <input id="{{ $id }}" name="{{ $name }}" type="text"
             class="block w-full border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-500 sm:text-sm rounded-md text-gray-900 py-2 px-3"
-            readonly placeholder="No image selected">
+            readonly placeholder="No image selected" {{ $attributes->whereStartsWith('wire:') }}>
     </div>
 
     <div id="{{ $previewId }}" style="margin-top:15px;max-height:100px; overflow: hidden;"
         class="flex justify-center items-center p-2 border border-gray-200 rounded-md bg-gray-50">
-        @if($value)
-        <img src="{{ $value }}" alt="Preview" style="max-height: 100px; max-width: 100%;">
-        @else
         <span class="text-gray-400 text-sm">Image preview will appear here</span>
-        @endif
     </div>
 </div>
 
@@ -39,16 +35,41 @@ $previewId = $id . '_holder';
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $('#{{ $buttonId }}').filemanager('{{ $type }}', { prefix: '{{ $routePrefix }}' });
-        Livewire.on('{{ Str::camel($attributes->get('wire:model')) }}Updated', (value) => {
+
+        const inputElement = document.getElementById('{{ $id }}');
+        if (inputElement) {
+            updatePreview(inputElement.value);
+
+            let lastValue = inputElement.value;
+            setInterval(function() {
+                if (inputElement.value !== lastValue) {
+                    lastValue = inputElement.value;
+                    inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                    updatePreview(inputElement.value);
+                }
+            }, 500);
+
+            inputElement.addEventListener('input', function() {
+                updatePreview(this.value);
+            });
+
+            document.addEventListener('livewire:updated', function() {
+                setTimeout(function() {
+                    updatePreview(inputElement.value);
+                }, 100);
+            });
+        }
+
+        function updatePreview(value) {
             const previewElement = document.getElementById('{{ $previewId }}');
             if (previewElement) {
                 if (value) {
-                        previewElement.innerHTML = `<img src="${value}" alt="Preview" style="max-height: 100px; max-width: 100%;">`;
+                    previewElement.innerHTML = `<img src="${value}" alt="Preview" style="max-height: 100px; max-width: 100%;">`;
                 } else {
-                        previewElement.innerHTML = `<span class="text-gray-400 text-sm">Image preview will appear here</span>`;
+                    previewElement.innerHTML = `<span class="text-gray-400 text-sm">Image preview will appear here</span>`;
                 }
             }
-        });
+        }
     });
 </script>
 @endpush
