@@ -107,6 +107,7 @@ Once the project is running:
 ## API Endpoints
 
 All API endpoints are prefixed with `/api`. Access requires a Bearer Token (Sanctum).
+Download [postman collection](https://drive.google.com/file/d/11bHLmOGUpAPuvBzOPqLEa013o-U4dtKM/view?usp=drive_link).
 
 ### Authentication
 
